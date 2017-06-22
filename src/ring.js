@@ -20,8 +20,10 @@ const ring = () => {
       return;
     }
 
+    // Of all devices, only consider ones that have "find my phone" enabled
     const capableDevices = devices.filter(isFindMyPhoneEnabled);
 
+    // For each of these devices, sound an alert
     capableDevices.forEach(device => {
       icloud.alertDevice(device.id, (err) => {
         if (err) {
@@ -34,7 +36,5 @@ const ring = () => {
     })
   });
 }
-
-console.log("Ring initialized with apple ID " + APPLE_ID);
 
 module.exports = debounce(ring, DEBOUNCE_MS);
